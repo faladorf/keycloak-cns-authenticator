@@ -169,16 +169,16 @@ public class CnsX509ClientCertificateAuthenticator extends X509ClientCertificate
 
                         for (PolicyInformation policy: policies.getPolicyInformation())
                         {
-                            if (policy.getPolicyIdentifier().toString().equals("1.3.76.16.2.1")) hasCnsExtension = true;
-                            if (policy.getPolicyIdentifier().toString().equals("1.3.76.47.4")) hasCieExtension = true;
+                            if (policy.getPolicyIdentifier().toString().equals("2.16.840.1.101.3.2.1.3.13")) hasCnsExtension = true;
+//                          if (policy.getPolicyIdentifier().toString().equals("1.3.76.47.4")) hasCieExtension = true;
                         }
                     }
                 }
 
                 logger.infof("CNS Extension: %s - CIE Extension: %s", hasCnsExtension ? "present": "absent", hasCieExtension ? "present": "absent");
 
-                if (!hasCnsExtension && !hasCieExtension)
-                    throw new Exception("Certificate extended policy does not contain required OIDs (1.3.76.16.2.1, 1.3.76.47.4).");
+                if (!hasCnsExtension)
+                    throw new Exception("Certificate extended policy does not contain required OIDs (2.16.840.1.101.3.2.1.3.13).");
             } catch(Exception e) {
                 logger.error(e.getMessage(), e);
                 // TODO use specific locale to load error messages
